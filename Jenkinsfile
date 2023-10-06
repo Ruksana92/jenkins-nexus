@@ -1,14 +1,14 @@
 pipeline {
     agent any
     tools {
-        maven "MAVEN"
+        maven "maven363"
     }
     environment {
         NEXUS_VERSION = "nexus3"
         NEXUS_PROTOCOL = "http"
-        NEXUS_URL = "159.223.191.140:8081"
-        NEXUS_REPOSITORY = "java-app"
-        NEXUS_CREDENTIAL_ID = "NEXUS_CRED"
+        NEXUS_URL = "54.89.28.118:8081"
+        NEXUS_REPOSITORY = "maven2"
+        NEXUS_CREDENTIAL_ID = "nexus"
     }
     stages {
         stage("Clone code from GitHub") {
@@ -21,7 +21,7 @@ pipeline {
         stage("Maven Build") {
             steps {
                 script {
-                    sh "mvn package -DskipTests=true"
+                    sh "mvn package -DskipTests=clean test package"
                 }
             }
         }
